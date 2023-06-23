@@ -24,18 +24,21 @@ const deleteEmployee = async (req, res) => {
     }
 };
 
-const getEmployeeById = async (req, res) => {
-    console.log(req.params.id);
+const getEmployeeById = async (req, res , next) => {
+    const employeeId = req.params.id
+    let employee;
     try {
-        const employee = await Employees.findById(req.params.id);
-        if (!employee) {
-            return res.status(404).send("Employee not found");
-        }
-        res.json(employee);
+        employee = await Employees.findById(employeeId);
     } catch (err) {
         console.error(err);
         res.status(500).send(`Error updating employee: ${err.message}`);
+        return next(err)
     }
+    if (!employee) {
+        const result = res.status(404).send("Employee not found");
+        res.json(result)
+    }
+    res.json( employee.toObject({getters : true}))
 };
 
 const getEmployees = async (req, res) => {
@@ -48,12 +51,18 @@ const getEmployees = async (req, res) => {
 };
 
 const searchEmployee = async (req, res) => {
-    console.log(req.params.search);
+    const employeeName = req.params.search
     try {
-        const employee = await Employees.find({ firstname: req.params.search });
+        const employees = await Employees.find()
+        const employee = employees.filter(item => (
+            item.firstname.toLocaleLowerCase().includes(employeeName) || 
+            item.lastname.toLocaleLowerCase().includes(employeeName) ||
+            item.email.toLocaleLowerCase().includes(employeeName)
+        ))
         if (!employee) {
-            return res.status(404).send("Employee not found");
+            res.status(404).send("Employee not found");
         }
+        console.log(employee)
         res.json(employee);
     } catch (err) {
         console.error(err);

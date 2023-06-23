@@ -18,22 +18,27 @@ const MainSection = ({ setEmployeeId }) => {
         try {
             const res = await axiosGet("/employee");
             setEmployees(res.data);
-            console.log(res.data)
         } catch (err) {
             console.log(err);
         }
     };
     const getEmployeeById = async (id) => {
+        console.log(id);
         try {
             const res = await axiosGet(`/employee/${id}`);
-            setEmpById(res.data);
+            console.log(res)
+            setEmpById(res);
+            setEmployees(res)
         } catch (err) {
             console.log(err);
         }
     };
     const handleSearch = async (e) => {
+        if(e.target.value === "") {
+            getAllEmployee()
+        }
         try {
-            const res = await axiosGet(`/employee/${e.target.value}`);
+            const res = await axiosGet(`/employee/searchemployee/${e.target.value}`);
             setEmployees(res.data);
         } catch (err) {
             console.log(err.message);
@@ -72,7 +77,7 @@ const MainSection = ({ setEmployeeId }) => {
                         <div className="searchBox">
                             <input
                                 type="text"
-                                placeholder="Search by name, email, designation etc"
+                                placeholder="Search by name, family or email ..."
                                 onChange={handleSearch}
                             />
                             <BiSearch size={20} />

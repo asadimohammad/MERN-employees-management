@@ -13,7 +13,7 @@ console.log('connecting...')
 mongoose
     .connect(
         // insert a url that get from mongodb and set your username and password
-        "mongodb+srv://username:password@Cluster0.mongodb.net/",
+        "mongodb+srv://mhmdasadi1367:Calmo0102@my-app.xcwxmzh.mongodb.net/",
         { dbName: "employeeManagement" },
         { collection: "employees" }
     )

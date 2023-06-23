@@ -6,7 +6,6 @@ import TopNav from './components/TopNav/TopNav';
 
 function App() {
   const [employeeId, setEmployeeId] = useState('')
-  console.log(employeeId)
   return (
     <div className="App">
       <TopNav/>

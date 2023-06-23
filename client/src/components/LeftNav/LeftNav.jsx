@@ -17,7 +17,6 @@ const LeftNav = ({ employeeId }) => {
   }
   useEffect(() => {
     getEmployeeById()
-    console.log(employeeId)
 
   }, [employeeId])
 
