@@ -12,7 +12,8 @@ app.use("/employee", employeeRouter);
 console.log('connecting...')
 mongoose
     .connect(
-        "mongodb+srv://mhmdasadi1367:Calmo0102@my-app.xcwxmzh.mongodb.net/",
+        // insert a url that get from mongodb and set your username and password
+        "mongodb+srv://username:password@Cluster0.mongodb.net/",
         { dbName: "employeeManagement" },
         { collection: "employees" }
     )
