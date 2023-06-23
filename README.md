@@ -1,4 +1,4 @@
-### This project is developed with :
+### This MERN project is developed with :
 * React for view of the app
 * Express.js and Node.js for backend of the app.
 * Mongodb for its data base.
